@@ -1,0 +1,18 @@
+export const ROUTES = {
+  LOGIN: '/login',
+  SIGNUP: '/signup',
+  APPLY: '/apply',
+  ONBOARDING: '/onboarding',
+  ONBOARDING_STATUS: '/onboarding/status',
+  DASHBOARD: '/dashboard',
+  PROFILE: '/profile',
+  ADMIN_USERS: '/admin/users',
+  ADMIN_ROLES: '/admin/roles',
+  ADMIN_ONBOARDING: '/admin/onboarding',
+  ADMIN_AUDIT_LOGS: '/admin/audit-logs',
+  PRODUCTIONS: '/productions',
+  LOCATIONS: '/locations',
+  FUNDS: '/funds',
+  COSTUMES: '/costumes',
+  UNAUTHORIZED: '/unauthorized',
+} as const;
