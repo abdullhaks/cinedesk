@@ -19,6 +19,7 @@ interface AuthState {
   setAccessToken: (token: string) => void;
   setUser: (user: User | null) => void;
   fetchMe: () => Promise<void>;
+  clearAuth: () => void;
   hasPermission: (permissionKey: string) => boolean;
 }
 
@@ -102,6 +103,15 @@ export const useAuthStore = create<AuthState>()(
         }
       },
 
+      clearAuth: () => {
+        set({
+          user: null,
+          accessToken: null,
+          isAuthenticated: false,
+          isLoading: false,
+        });
+      },
+
       hasPermission: (permissionKey: string) => {
         const user = get().user;
         if (!user || !user.role || !Array.isArray(user.role.permissions)) {
@@ -114,7 +124,7 @@ export const useAuthStore = create<AuthState>()(
       },
     }),
     {
-      name: 'cinidesk_auth_store',
+      name: 'cinedesk_auth_store',
       partialize: (state) => ({
         user: state.user,
         accessToken: state.accessToken,
@@ -123,3 +133,22 @@ export const useAuthStore = create<AuthState>()(
     }
   )
 );
+
+// Sync auth state across tabs
+if (typeof window !== 'undefined') {
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'cinedesk_auth_store') {
+      try {
+        const newValue = JSON.parse(event.newValue || '{}');
+        if (newValue?.state?.accessToken === null && useAuthStore.getState().accessToken !== null) {
+          useAuthStore.getState().clearAuth();
+          if (window.location.pathname !== '/login') {
+            window.location.href = '/login';
+          }
+        }
+      } catch (e) {
+        // ignore parse errors
+      }
+    }
+  });
+}

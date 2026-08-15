@@ -92,7 +92,21 @@ export const OnboardingReview: React.FC = () => {
     return /\.(jpg|jpeg|png|webp|gif|svg|bmp)(\?.*)?$/i.test(url) || url.includes('/image/upload/');
   };
 
-  const handleDownload = async (url: string, fileName?: string) => {
+  const getExtension = (url: string) => {
+    if (url.startsWith('data:')) {
+      const mime = url.substring(5, url.indexOf(';'));
+      if (mime === 'application/pdf') return '.pdf';
+      if (mime === 'application/msword') return '.doc';
+      if (mime === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') return '.docx';
+      return '';
+    }
+    const parts = url.split('?')[0].split('.');
+    return parts.length > 1 ? `.${parts.pop()}` : '';
+  };
+
+  const handleDownload = async (url: string, baseName?: string) => {
+    const ext = getExtension(url) || '.pdf';
+    const fileName = `${baseName || 'document'}${ext}`;
     try {
       message.loading({ content: 'Downloading document...', key: 'doc_download', duration: 1.5 });
       const response = await fetch(url);
@@ -100,8 +114,7 @@ export const OnboardingReview: React.FC = () => {
       const blobUrl = window.URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = blobUrl;
-      const name = fileName || url.split('/').pop()?.split('?')[0] || 'document';
-      link.download = name;
+      link.download = fileName;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -111,7 +124,7 @@ export const OnboardingReview: React.FC = () => {
       const link = document.createElement('a');
       link.href = url;
       link.target = '_blank';
-      link.download = fileName || 'document';
+      link.download = fileName;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -372,7 +385,7 @@ export const OnboardingReview: React.FC = () => {
                               </a>
                               <button
                                 type="button"
-                                onClick={() => handleDownload(doc.fileUrl, `${doc.type || 'document'}.pdf`)}
+                                onClick={() => handleDownload(doc.fileUrl, doc.type || 'document')}
                                 className="flex items-center gap-1 px-2.5 py-1.5 bg-white hover:bg-slate-100 text-slate-700 text-xs font-semibold rounded-lg transition-colors border border-slate-200 cursor-pointer"
                               >
                                 <Download size={13} /> Download

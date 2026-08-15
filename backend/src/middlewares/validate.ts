@@ -2,10 +2,7 @@ import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { ZodSchema, ZodError } from 'zod';
 import { HttpStatusCode } from '../utils/enum';
 
-/**
- * Zod schema-driven request validator middleware.
- * Validates req.body against the provided Zod schema.
- */
+// Zod request validator middleware....
 export function validate(schema: ZodSchema): RequestHandler {
   return (req: Request, res: Response, next: NextFunction): void => {
     try {

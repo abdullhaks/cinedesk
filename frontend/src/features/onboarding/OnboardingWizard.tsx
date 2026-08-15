@@ -7,7 +7,7 @@ import type { StepItem } from '../../components/form/Stepper';
 import { FormField } from '../../components/form/FormField';
 import { FileUploadField } from '../../components/form/FileUploadField';
 import { LoadingSkeleton, ErrorState } from '../../components/common/States';
-import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck, Trash2 } from 'lucide-react';
 import { OnboardingHeader } from '../../components/layout/OnboardingHeader';
 import { message } from 'antd';
 
@@ -189,7 +189,7 @@ export const OnboardingWizard: React.FC = () => {
               <div className="w-14 h-14 rounded-2xl bg-slate-100 text-slate-900 flex items-center justify-center mx-auto mb-2">
                 <ShieldCheck size={32} />
               </div>
-              <h2 className="text-xl font-bold text-slate-900">Welcome to Cinidesk Pro</h2>
+              <h2 className="text-xl font-bold text-slate-900">Welcome to Cinedesk Pro</h2>
               <p className="text-sm text-slate-500 max-w-md mx-auto">
                 You are beginning your digital onboarding process as a{' '}
                 <strong className="text-slate-800">{application?.contractorType}</strong>. Please complete the following steps to submit your application for administrative review.
@@ -276,12 +276,12 @@ export const OnboardingWizard: React.FC = () => {
                   </select>
                 </FormField>
 
-                <FormField label="Bank Account Details / Routing Number" required>
+                <FormField label="Bank Account Details " required>
                   <input
                     type="text"
                     value={financial.bankDetails}
                     onChange={(e) => setFinancial({ ...financial, bankDetails: e.target.value })}
-                    placeholder="Bank Name, Routing #, Account #"
+                    placeholder="Bank Name, Account holder, Account No, IFSC Code"
                     className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm"
                   />
                 </FormField>
@@ -333,7 +333,25 @@ export const OnboardingWizard: React.FC = () => {
                         className="flex items-center justify-between text-xs bg-slate-50 p-2.5 rounded-xl border border-slate-200"
                       >
                         <span className="font-semibold text-slate-700">{doc.type}</span>
-                        <span className="text-emerald-600 font-medium">Uploaded</span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-emerald-600 font-medium">Uploaded</span>
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              try {
+                                await onboardingApi.updateStep(application._id, 'documents', { type: doc.type, action: 'remove' });
+                                message.success(`${doc.type} removed successfully`);
+                                fetchApplication();
+                              } catch (err: any) {
+                                message.error('Failed to remove document');
+                              }
+                            }}
+                            className="text-slate-400 hover:text-rose-500 transition-colors"
+                            title={`Remove ${doc.type}`}
+                          >
+                            <Trash2 size={16} />
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -349,7 +367,7 @@ export const OnboardingWizard: React.FC = () => {
                 Step 5: Contractor Terms & Digital Signature
               </h2>
               <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-600 leading-relaxed max-h-36 overflow-y-auto">
-                By submitting this application, you declare that all provided personal, financial, and tax information is truthful and accurate. You agree to adhere to Cinidesk Pro platform guidelines and studio safety protocols.
+                By submitting this application, you declare that all provided personal, financial, and tax information is truthful and accurate. You agree to adhere to Cinedesk Pro platform guidelines and studio safety protocols.
               </div>
 
               <FormField label="Digital Signature (Full Legal Name)" required>

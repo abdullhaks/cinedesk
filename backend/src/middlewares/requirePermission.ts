@@ -4,12 +4,7 @@ import { MESSAGES } from '../utils/messages';
 import { IPermissionDocument } from '../entities/permissionEntity';
 import { IRoleDocument } from '../entities/roleEntity';
 
-/**
- * Permission-based authorization middleware.
- * Checks that the authenticated user's role has the required permission key.
- * Uses the live-populated permissions from authenticate middleware.
- * Per plan.md Section 5.4: requirePermission(permissionKey: string): RequestHandler
- */
+
 export function requirePermission(permissionKey: string): RequestHandler {
   return (req: Request, _res: Response, next: NextFunction): void => {
     const user = (req as any).user;

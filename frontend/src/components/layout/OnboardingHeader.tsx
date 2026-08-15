@@ -17,7 +17,7 @@ export const OnboardingHeader: React.FC = () => {
     <header className="w-full bg-white border-b border-slate-200/80 px-4 sm:px-8 py-3 flex items-center justify-between sticky top-0 z-30 shadow-xs">
       <div className="flex items-center gap-3">
         <img
-          src="/appicon.png"
+          src="/appicon2.PNG"
           alt="App Icon"
           className="h-9 max-w-[170px] object-contain"
         />

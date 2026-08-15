@@ -94,8 +94,7 @@ export default class FundRequestService implements IFundRequestService {
 
     const requesterId = (reqDoc.requester as any)._id?.toString() || reqDoc.requester.toString();
 
-    // SELF-APPROVAL GUARD (Section 11 Edge-Case Table)
-    // If requester === approver -> HTTP 403 Forbidden ("Self-approval of fund requests is prohibited")
+    // SELF-APPROVAL GUARD
     if (requesterId === approverId) {
       throw ApiError.forbidden(MESSAGES.fundRequest.selfApproval);
     }

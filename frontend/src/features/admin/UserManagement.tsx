@@ -7,6 +7,7 @@ import { StatusBadge } from '../../components/common/StatusBadge';
 import { LoadingSkeleton, ErrorState } from '../../components/common/States';
 import { Shield, UserX, Search } from 'lucide-react';
 import { Modal, message, Select } from 'antd';
+import { useDebounce } from '../../hooks/useDebounce';
 
 export const UserManagement: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
@@ -16,6 +17,7 @@ export const UserManagement: React.FC = () => {
 
   // Filters
   const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 500);
   const [statusFilter, setStatusFilter] = useState('');
 
   // Assign Role Modal
@@ -28,7 +30,7 @@ export const UserManagement: React.FC = () => {
     setError(null);
     try {
       const [usersRes, rolesRes] = await Promise.all([
-        userApi.listUsers({ search, status: statusFilter }),
+        userApi.listUsers({ search: debouncedSearch, status: statusFilter }),
         roleApi.listRoles(),
       ]);
       setUsers(usersRes.items || []);
@@ -42,7 +44,7 @@ export const UserManagement: React.FC = () => {
 
   useEffect(() => {
     fetchData();
-  }, [statusFilter]);
+  }, [debouncedSearch, statusFilter]);
 
   const handleOpenAssignRole = (user: User) => {
     setSelectedUser(user);
@@ -172,7 +174,6 @@ export const UserManagement: React.FC = () => {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && fetchData()}
               placeholder="Search user email or name..."
               className="pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none"
             />

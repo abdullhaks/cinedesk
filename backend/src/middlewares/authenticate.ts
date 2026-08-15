@@ -4,14 +4,6 @@ import { ApiError } from '../utils/ApiError';
 import { MESSAGES } from '../utils/messages';
 import User from '../models/User.model';
 
-/**
- * Authenticate middleware.
- * Verifies the JWT access token from the Authorization header.
- * CRITICAL: Always re-populates req.user.role.permissions LIVE from the DB
- * on every request — never trusts JWT payload for permissions.
- * This makes "permission removed from role" and "role changed" edge cases
- * self-resolving without a re-login (plan.md Section 5.4).
- */
 export const authenticate = async (
   req: Request,
   _res: Response,
@@ -29,7 +21,7 @@ export const authenticate = async (
       throw ApiError.unauthorized(MESSAGES.auth.unauthorized);
     }
 
-    // Live DB lookup — never cache permissions in JWT
+    //DB lookup for permissions...
     const user = await User.findById(decoded.userId).populate({
       path: 'role',
       populate: { path: 'permissions' },

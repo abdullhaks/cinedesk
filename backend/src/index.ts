@@ -14,7 +14,7 @@ import dns from 'dns';
 
 
  dns.setServers(['8.8.8.8', '1.1.1.1']);
-// Load environment variables from config/.env
+// Load environment variables...
 dotenv.config({ path: path.join(__dirname, 'config', '.env') });
 
 const app = express();
@@ -34,14 +34,28 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-// Health check
-app.get('/', (_req, res) => {
-  res.json({ status: 'ok', app: 'CINIDESK PRO', version: '1.0.0' });
+import rateLimit from 'express-rate-limit';
+
+const maxRequests = parseInt(process.env.RATELIMIT || '30', 10);
+const globalLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: maxRequests,
+  message: { message: 'Too many requests from this IP, please try again after a minute' },
+  standardHeaders: true,
+  legacyHeaders: false,
 });
 
-// Swagger documentation (accessible at /apidocs and /api-docs)
+// Apply rate limiter to all routes
+app.use(globalLimiter);
+
+// Health check
+app.get('/', (_req, res) => {
+  res.json({ status: 'ok', app: 'CINEDESK PRO', version: '1.0.0' });
+});
+
+// Swagger documentation (accessible at /apidocs)
 const swaggerUiOptions = {
-  customSiteTitle: 'CINIDESK PRO - Enterprise API Documentation',
+  customSiteTitle: 'CINEDESK PRO - Enterprise API Documentation',
   customCss: `
     .swagger-ui .topbar { background-color: #0f172a; border-bottom: 2px solid #6366f1; }
     .swagger-ui .topbar .topbar-wrapper .link span { display: inline-block; font-size: 20px; font-weight: 700; color: #fff; }
@@ -64,19 +78,18 @@ const swaggerUiOptions = {
 };
 
 app.use('/apidocs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerUiOptions));
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec, swaggerUiOptions));
 app.get('/docs', (_req, res) => res.redirect('/apidocs'));
 
 // API routes
 app.use('/api', router);
 
-// Global error handler (must be after routes)
+// Global error handler
 app.use(errorHandler);
 
 // Connect to DB and start server
 connectDB().then(() => {
   app.listen(port, () => {
-    logger.info(`CINIDESK PRO is running on http://localhost:${port}`);
+    logger.info(`CINEDESK PRO is running on http://localhost:${port}`);
   });
 });
 

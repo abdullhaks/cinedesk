@@ -116,7 +116,7 @@ export const SignupContractor: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <img
-            src="/appicon.png"
+            src="/appicon2.PNG"
             alt="App Icon"
             className="h-16 mx-auto mb-3 object-contain"
           />

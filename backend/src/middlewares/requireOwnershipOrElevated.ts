@@ -4,13 +4,7 @@ import { MESSAGES } from '../utils/messages';
 import { IPermissionDocument } from '../entities/permissionEntity';
 import { IRoleDocument } from '../entities/roleEntity';
 
-/**
- * Ownership-or-elevated-permission guard.
- * Allows the request if:
- *   1. The user owns the resource (getResourceOwnerId returns the user's ID), OR
- *   2. The user has the elevatedPermission key.
- * Per plan.md Section 5.4.
- */
+
 export function requireOwnershipOrElevated(
   getResourceOwnerId: (req: Request) => Promise<string | null>,
   elevatedPermission: string

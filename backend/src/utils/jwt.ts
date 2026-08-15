@@ -1,7 +1,7 @@
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
-const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || 'cinidesk_pro_access_secret_key_2024';
-const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || 'cinidesk_pro_refresh_secret_key_2024';
+const ACCESS_TOKEN_SECRET = process.env.ACCESS_TOKEN_SECRET || 'cinedesk_pro_access_secret_key_2024';
+const REFRESH_TOKEN_SECRET = process.env.REFRESH_TOKEN_SECRET || 'cinedesk_pro_refresh_secret_key_2024';
 const ACCESS_TOKEN_EXPIRY = process.env.ACCESS_TOKEN_EXPIRY || '15m';
 const REFRESH_TOKEN_EXPIRY = process.env.REFRESH_TOKEN_EXPIRY || '7d';
 

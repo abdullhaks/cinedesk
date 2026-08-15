@@ -101,13 +101,16 @@ export default class OnboardingService implements IOnboardingService {
 
     const currentSteps = app.steps || {};
     if (stepName === 'documents') {
-      // Append document to documents array
       currentSteps.documents = currentSteps.documents || [];
-      currentSteps.documents.push({
-        type: stepData.type,
-        fileUrl: stepData.fileUrl,
-        uploadedAt: new Date(),
-      });
+      if (stepData.action === 'remove') {
+        currentSteps.documents = currentSteps.documents.filter((d: any) => d.type !== stepData.type);
+      } else {
+        currentSteps.documents.push({
+          type: stepData.type,
+          fileUrl: stepData.fileUrl,
+          uploadedAt: new Date(),
+        });
+      }
     } else if (stepName === 'sign') {
       currentSteps.sign = {
         agreedAt: new Date(),

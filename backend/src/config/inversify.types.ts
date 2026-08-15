@@ -1,5 +1,3 @@
-// Inversify Symbol registry — TYPES.IUserService, TYPES.IUserRepository, etc.
-// All bindings reference these symbols, never string literals.
 
 const TYPES = {
   // Models

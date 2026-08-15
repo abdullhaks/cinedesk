@@ -30,7 +30,7 @@ export const Sidebar: React.FC = () => {
       {/* Brand Header */}
       <div className={`h-16 flex items-center border-b border-slate-800 ${sidebarCollapsed ? 'justify-center px-2' : 'px-5'}`}>
         <img
-          src="/appicon.png"
+          src="/appicon1.PNG"
           alt="App Icon"
           className={`object-contain transition-all ${sidebarCollapsed ? 'h-9 w-9' : 'h-10 max-w-[180px]'}`}
         />
@@ -60,7 +60,7 @@ export const Sidebar: React.FC = () => {
       {/* Footer Info */}
       {!sidebarCollapsed && (
         <div className="p-4 border-t border-slate-800 text-xs text-slate-500">
-          Cinidesk Pro v1.0.0
+          Cinedesk Pro v1.0.0
         </div>
       )}
     </aside>

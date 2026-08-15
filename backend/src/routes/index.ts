@@ -26,15 +26,4 @@ router.use('/audit-logs', auditLogRouter);
 router.use('/notifications', notificationRouter);
 router.use('/dashboard', dashboardRouter);
 
-// Stub routes for later phases
-// router.use('/onboarding', onboardingRouter);
-// router.use('/users', userRouter);
-// router.use('/roles', roleRouter);
-// router.use('/productions', productionRouter);
-// router.use('/locations', locationRouter);
-// router.use('/fund-requests', fundRequestRouter);
-// router.use('/costumes', costumeRouter);
-// router.use('/audit-logs', auditLogRouter);
-// router.use('/notifications', notificationRouter);
-
 export default router;

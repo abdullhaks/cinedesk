@@ -69,12 +69,19 @@ export const createAxiosInstance = (): AxiosInstance => {
           }
         } catch (refreshErr) {
           // Token refresh failed — logout and redirect
-          useAuthStore.getState().logout();
+          useAuthStore.getState().clearAuth();
           if (window.location.pathname !== '/login') {
             window.location.href = '/login';
           }
           return Promise.reject(refreshErr);
         }
+      }
+
+      // Handle 429 Rate Limit
+      if (error.response?.status === 429) {
+        import('antd').then(({ message }) => {
+          message.error('Too many requests. Please slow down and try again in a minute.');
+        });
       }
 
       return Promise.reject(error);

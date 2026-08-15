@@ -17,7 +17,7 @@ export default class AuthController implements IAuthController {
     const result = await this._authService.register(fullName, email, password);
 
     // Set refresh token as httpOnly cookie
-    res.cookie('cinidesk_refreshToken', result.refreshToken, {
+    res.cookie('cinedesk_refreshToken', result.refreshToken, {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
@@ -41,7 +41,7 @@ export default class AuthController implements IAuthController {
     );
 
     // Set refresh token as httpOnly cookie
-    res.cookie('cinidesk_refreshToken', result.refreshToken, {
+    res.cookie('cinedesk_refreshToken', result.refreshToken, {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
@@ -61,7 +61,7 @@ export default class AuthController implements IAuthController {
     const result = await this._authService.login(email, password);
 
     // Set refresh token as httpOnly cookie
-    res.cookie('cinidesk_refreshToken', result.refreshToken, {
+    res.cookie('cinedesk_refreshToken', result.refreshToken, {
       httpOnly: true,
       sameSite: 'none',
       secure: true,
@@ -76,7 +76,7 @@ export default class AuthController implements IAuthController {
   }
 
   async refresh(req: Request, res: Response): Promise<void> {
-    const refreshToken = req.cookies?.cinidesk_refreshToken;
+    const refreshToken = req.cookies?.cinedesk_refreshToken;
     const result = await this._authService.refresh(refreshToken);
 
     res.status(HttpStatusCode.OK).json({
@@ -89,7 +89,7 @@ export default class AuthController implements IAuthController {
     const userId = (req as any).user?._id?.toString() || '';
     await this._authService.logout(userId);
 
-    res.clearCookie('cinidesk_refreshToken', {
+    res.clearCookie('cinedesk_refreshToken', {
       httpOnly: true,
       sameSite: 'none',
       secure: true,

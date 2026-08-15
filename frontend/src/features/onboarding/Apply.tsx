@@ -45,7 +45,7 @@ export const Apply: React.FC = () => {
           <div className="text-center mb-10">
             <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Contractor Application Portal</h1>
             <p className="text-sm text-slate-500 mt-2 max-w-md mx-auto">
-              Select your contractor role to begin your digital onboarding application for Cinidesk Pro.
+              Select your contractor role to begin your digital onboarding application for Cinedesk Pro.
             </p>
           </div>
 

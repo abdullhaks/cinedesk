@@ -4,6 +4,7 @@ import type { AuditLogItem } from '../../interfaces/auditLog';
 import { DataTable } from '../../components/common/DataTable';
 import { LoadingSkeleton, ErrorState } from '../../components/common/States';
 import { ShieldCheck, Search, Calendar, Database } from 'lucide-react';
+import { useDebounce } from '../../hooks/useDebounce';
 
 export const AuditLogList: React.FC = () => {
   const [logs, setLogs] = useState<AuditLogItem[]>([]);
@@ -12,13 +13,14 @@ export const AuditLogList: React.FC = () => {
 
   // Filters
   const [search, setSearch] = useState('');
+  const debouncedSearch = useDebounce(search, 500);
   const [entityFilter, setEntityFilter] = useState('');
 
   const fetchLogs = async () => {
     setLoading(true);
     setError(null);
     try {
-      const res = await auditLogApi.listLogs({ search, targetEntity: entityFilter });
+      const res = await auditLogApi.listLogs({ search: debouncedSearch, targetEntity: entityFilter });
       setLogs(res.items || []);
     } catch (err: any) {
       setError('Failed to load system audit logs.');
@@ -29,7 +31,7 @@ export const AuditLogList: React.FC = () => {
 
   useEffect(() => {
     fetchLogs();
-  }, [entityFilter]);
+  }, [debouncedSearch, entityFilter]);
 
   const columns = [
     {
@@ -108,7 +110,6 @@ export const AuditLogList: React.FC = () => {
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && fetchLogs()}
               placeholder="Search action event..."
               className="pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none"
             />

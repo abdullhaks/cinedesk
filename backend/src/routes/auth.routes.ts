@@ -11,7 +11,7 @@ const authRouter = express.Router();
 
 const authController = container.get<IAuthController>(TYPES.IAuthController);
 
-// POST /api/auth/register — public (internal use only)
+
 authRouter.post(
   '/register',
   validate(registerSchema),

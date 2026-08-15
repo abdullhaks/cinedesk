@@ -3,12 +3,12 @@ import swaggerJSDoc from 'swagger-jsdoc';
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'CINIDESK PRO - Enterprise Film Production Platform API',
+    title: 'CINEDESK PRO - Enterprise Film Production Platform API',
     version: '1.0.0',
     description: `
-## 🎬 CINIDESK PRO API Documentation
+## 🎬 CINEDESK PRO API Documentation
 
-Welcome to the **CINIDESK PRO** REST API documentation. CINIDESK PRO is a comprehensive, production-grade enterprise platform designed for film studio management, contractor onboarding workflows, resource allocation, and financial compliance.
+Welcome to the **CINEDESK PRO** REST API documentation. CINEDESK PRO is a comprehensive, production-grade enterprise platform designed for film studio management, contractor onboarding workflows, resource allocation, and financial compliance.
 
 ### 🔐 Authentication & Authorization
 - **Authentication**: JWT Bearer Token (Authorization Header: \`Bearer <access_token>\`) or Refresh Cookie for token renewals.
@@ -16,11 +16,11 @@ Welcome to the **CINIDESK PRO** REST API documentation. CINIDESK PRO is a compre
 
 ### 🌐 Base URLs
 - **Local Dev Server**: \`http://localhost:3000\`
-- **Swagger Documentation UI**: \`http://localhost:3000/apidocs\` or \`http://localhost:3000/api-docs\`
+- **Swagger Documentation UI**: \`http://localhost:3000/apidocs\`
     `,
     contact: {
-      name: 'CINIDESK Engineering Support',
-      email: 'dev@cinideskpro.internal',
+      name: 'CINEDESK Engineering Support',
+      email: 'dev@cinedeskpro.internal',
     },
   },
   servers: [
@@ -81,7 +81,7 @@ Welcome to the **CINIDESK PRO** REST API documentation. CINIDESK PRO is a compre
         properties: {
           _id: { type: 'string', example: '66a12b3c4d5e6f7a8b9c0d1e' },
           name: { type: 'string', example: 'John Director' },
-          email: { type: 'string', format: 'email', example: 'director@cinidesk.com' },
+          email: { type: 'string', format: 'email', example: 'director@cinedesk.com' },
           phone: { type: 'string', example: '+1 555 123 4567' },
           role: {
             type: 'object',
@@ -92,7 +92,7 @@ Welcome to the **CINIDESK PRO** REST API documentation. CINIDESK PRO is a compre
             },
           },
           isActive: { type: 'boolean', example: true },
-          avatar: { type: 'string', example: 'https://res.cloudinary.com/cinidesk/image/upload/v1/avatar.jpg' },
+          avatar: { type: 'string', example: 'https://res.cloudinary.com/cinedesk/image/upload/v1/avatar.jpg' },
           createdAt: { type: 'string', format: 'date-time', example: '2026-08-01T10:00:00.000Z' },
         },
       },
@@ -366,7 +366,7 @@ Welcome to the **CINIDESK PRO** REST API documentation. CINIDESK PRO is a compre
                 required: ['name', 'email', 'password'],
                 properties: {
                   name: { type: 'string', example: 'Alex Turner' },
-                  email: { type: 'string', format: 'email', example: 'alex@cinidesk.com' },
+                  email: { type: 'string', format: 'email', example: 'alex@cinedesk.com' },
                   password: { type: 'string', format: 'password', example: 'Password123!' },
                   phone: { type: 'string', example: '+1 555 333 4444' },
                   roleId: { type: 'string', example: '66a12b3c4d5e6f7a8b9c0d20' },
@@ -448,7 +448,7 @@ Welcome to the **CINIDESK PRO** REST API documentation. CINIDESK PRO is a compre
                 type: 'object',
                 required: ['email', 'password'],
                 properties: {
-                  email: { type: 'string', format: 'email', example: 'director@cinidesk.com' },
+                  email: { type: 'string', format: 'email', example: 'director@cinedesk.com' },
                   password: { type: 'string', format: 'password', example: 'Password123!' },
                 },
               },

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { useAuthStore } from '../../zustand/authStore';
 import { ROUTES } from '../../constants/routes';
-import { Shield, ArrowRight, Lock, Mail, UserPlus, Sparkles, Film, CheckCircle2, DollarSign, Clapperboard, Eye, EyeOff } from 'lucide-react';
+import { Shield, ArrowRight, Lock, Mail, UserPlus, Sparkles, Clapperboard, Eye, EyeOff } from 'lucide-react';
 import { message } from 'antd';
 
 const TEST_ACCOUNTS = [
@@ -29,6 +29,12 @@ export const Login: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const from = (location.state as any)?.from?.pathname || ROUTES.DASHBOARD;
+
+  React.useEffect(() => {
+    if (useAuthStore.getState().isAuthenticated) {
+      navigate(ROUTES.DASHBOARD, { replace: true });
+    }
+  }, [navigate]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -62,14 +68,14 @@ export const Login: React.FC = () => {
 
           {/* Top Logo Section */}
           <div className="relative z-10">
-            <div className="flex items-center gap-3">
+            <div className="flex items-center justify-center gap-3">
               <img
-                src="/appicon.png"
+                src="/appicon1.PNG"
                 alt="App Logo"
-                className="h-12 w-auto object-contain drop-shadow-md"
+                className="h-40 w-auto object-contain drop-shadow-md rounded-xl"
               />
             </div>
-            <div className="mt-8">
+            <div className="mt-8 flex flex-col items-center justify-center">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-800/80 border border-zinc-700/60 text-xs font-semibold text-zinc-300 mb-4 shadow-inner">
                 <Clapperboard size={13} className="text-zinc-400" />
                 <span>Next-Gen Film Production Suite</span>
@@ -84,7 +90,7 @@ export const Login: React.FC = () => {
           </div>
 
           {/* Feature Highlights Showcase */}
-          <div className="my-8 space-y-3 relative z-10">
+          {/* <div className="my-8 space-y-3 relative z-10">
             <div className="p-3.5 rounded-2xl bg-zinc-900/70 border border-zinc-800/80 backdrop-blur-sm flex items-start gap-3.5 transition-transform hover:translate-x-1">
               <div className="p-2 rounded-xl bg-zinc-800 text-zinc-200 shrink-0">
                 <Film size={18} />
@@ -114,7 +120,7 @@ export const Login: React.FC = () => {
                 <div className="text-[11px] text-zinc-400 mt-0.5">Strict permission boundaries across 8 specialized studio roles.</div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Bottom Version Tag */}
           <div className="relative z-10 pt-4 border-t border-zinc-800/60 flex items-center justify-between text-[11px] text-zinc-500">
