@@ -4,7 +4,7 @@ import TYPES from '../config/inversify.types';
 import { IAuthController } from '../controllers/interfaces/IAuth.controller';
 import { authenticate } from '../middlewares/authenticate';
 import { validate } from '../middlewares/validate';
-import { registerSchema, loginSchema } from '../validators/auth.validator';
+import { registerSchema, registerContractorSchema, loginSchema } from '../validators/auth.validator';
 import { catchAsync } from '../utils/catchAsync';
 
 const authRouter = express.Router();
@@ -21,10 +21,12 @@ authRouter.post(
 // POST /api/auth/register-contractor & /signup-contractor — public contractor onboarding signup
 authRouter.post(
   '/register-contractor',
+  validate(registerContractorSchema),
   catchAsync((req, res) => authController.registerContractor(req, res))
 );
 authRouter.post(
   '/signup-contractor',
+  validate(registerContractorSchema),
   catchAsync((req, res) => authController.registerContractor(req, res))
 );
 

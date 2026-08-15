@@ -239,7 +239,7 @@ export const Dashboard: React.FC = () => {
           </div>
 
           <div className="pt-4 border-t border-slate-100 mt-4 text-center">
-            <span className="text-xs font-semibold text-blue-600 hover:text-blue-700 cursor-pointer">
+            <span className="text-xs font-bold text-slate-900 hover:text-black cursor-pointer">
               View Detailed Analytics &rarr;
             </span>
           </div>

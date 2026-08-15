@@ -53,7 +53,7 @@ export const FileUploadField: React.FC<FileUploadFieldProps> = ({
       {!uploadedUrl ? (
         <label className="flex flex-col items-center justify-center py-4 cursor-pointer">
           <Upload size={24} className="text-slate-400 mb-2" />
-          <span className="text-xs font-semibold text-blue-600 hover:text-blue-700">
+          <span className="text-xs font-semibold text-slate-900 hover:text-black">
             {uploading ? 'Uploading...' : 'Click to upload or drag & drop'}
           </span>
           <span className="text-[11px] text-slate-400 mt-1">Accepted: PDF, PNG, JPG (Max 10MB)</span>
@@ -68,10 +68,10 @@ export const FileUploadField: React.FC<FileUploadFieldProps> = ({
       ) : (
         <div className="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-xl">
           <div className="flex items-center gap-2 text-xs font-medium text-slate-700">
-            <FileText size={16} className="text-blue-500" />
+            <FileText size={16} className="text-zinc-800" />
             <span className="truncate max-w-[200px]">{fileName}</span>
           </div>
-          <label className="text-xs font-semibold text-blue-600 cursor-pointer hover:underline">
+          <label className="text-xs font-semibold text-slate-900 cursor-pointer hover:underline">
             Replace
             <input
               type="file"

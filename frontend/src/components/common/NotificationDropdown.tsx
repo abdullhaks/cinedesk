@@ -69,7 +69,7 @@ export const NotificationDropdown: React.FC = () => {
       case 'error':
         return <XCircle size={16} className="text-rose-500 shrink-0" />;
       default:
-        return <Info size={16} className="text-blue-500 shrink-0" />;
+        return <Info size={16} className="text-zinc-700 shrink-0" />;
     }
   };
 
@@ -79,7 +79,7 @@ export const NotificationDropdown: React.FC = () => {
         <div className="flex items-center gap-2">
           <span className="font-bold text-slate-800">Notifications</span>
           {unreadCount > 0 && (
-            <span className="bg-blue-100 text-blue-700 text-[10px] font-bold px-1.5 py-0.5 rounded-full">
+            <span className="bg-black text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">
               {unreadCount} new
             </span>
           )}
@@ -89,15 +89,15 @@ export const NotificationDropdown: React.FC = () => {
           <button
             onClick={handleRefresh}
             disabled={refreshing}
-            className="p-1 rounded-md text-slate-500 hover:text-blue-600 hover:bg-slate-200/70 transition-all disabled:opacity-50"
+            className="p-1 rounded-md text-slate-500 hover:text-black hover:bg-slate-200/70 transition-all disabled:opacity-50"
             title="Refresh notifications"
           >
-            <RefreshCw size={13} className={refreshing ? 'animate-spin text-blue-600' : ''} />
+            <RefreshCw size={13} className={refreshing ? 'animate-spin text-black' : ''} />
           </button>
           {unreadCount > 0 && (
             <button
               onClick={handleMarkAllRead}
-              className="text-[11px] font-semibold text-blue-600 hover:text-blue-800"
+              className="text-[11px] font-semibold text-slate-900 hover:text-black"
             >
               Mark all read
             </button>
@@ -112,7 +112,7 @@ export const NotificationDropdown: React.FC = () => {
               key={item._id}
               onClick={() => handleMarkAsRead(item._id, item.link)}
               className={`p-3 cursor-pointer transition-colors flex items-start gap-2.5 ${
-                item.isRead ? 'bg-white hover:bg-slate-50 opacity-75' : 'bg-blue-50/40 hover:bg-blue-50 font-medium'
+                item.isRead ? 'bg-white hover:bg-slate-50 opacity-75' : 'bg-slate-100/70 hover:bg-slate-100 font-medium'
               }`}
             >
               {renderIcon(item.type)}

@@ -62,17 +62,17 @@ export const Apply: React.FC = () => {
               <div
                 key={item.type}
                 onClick={() => !loading && handleSelectType(item.type)}
-                className="card-minimal cursor-pointer group hover:border-blue-500 border border-transparent transition-all duration-200 flex items-start gap-4 p-5"
+                className="card-minimal cursor-pointer group hover:border-black border border-transparent transition-all duration-200 flex items-start gap-4 p-5"
               >
-                <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center group-hover:bg-black group-hover:text-white transition-colors">
                   <Icon size={20} />
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-sm font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-sm font-bold text-slate-800 group-hover:text-black transition-colors">
                       {item.label}
                     </h3>
-                    <ArrowRight size={16} className="text-slate-300 group-hover:text-blue-600 transition-colors" />
+                    <ArrowRight size={16} className="text-slate-300 group-hover:text-black transition-colors" />
                   </div>
                   <p className="text-xs text-slate-500 mt-1 mb-0">{item.desc}</p>
                 </div>

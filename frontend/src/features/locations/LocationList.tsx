@@ -39,12 +39,8 @@ export const LocationList: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const [locsRes, prodsRes] = await Promise.all([
-        locationApi.listLocations({ status: statusFilter }),
-        productionApi.listProductions(),
-      ]);
+      const locsRes = await locationApi.listLocations({ status: statusFilter });
       setLocations(locsRes.items || []);
-      setProductions(prodsRes.items || []);
     } catch (err: any) {
       setError('Failed to load shooting locations.');
     } finally {
@@ -52,9 +48,22 @@ export const LocationList: React.FC = () => {
     }
   };
 
+  const fetchProductions = async () => {
+    try {
+      const prodsRes = await productionApi.listProductions();
+      setProductions(prodsRes.items || []);
+    } catch {
+      setProductions([]);
+    }
+  };
+
   useEffect(() => {
     fetchLocations();
   }, [statusFilter]);
+
+  useEffect(() => {
+    fetchProductions();
+  }, []);
 
   const handleCreateLocation = async () => {
     if (!newLocName.trim() || !newLocAddress.trim()) {
@@ -168,7 +177,7 @@ export const LocationList: React.FC = () => {
       render: (_: any, record: LocationItem) => (
         <button
           onClick={() => setSelectedLoc(record)}
-          className="flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors"
+          className="flex items-center gap-1 text-xs font-semibold text-slate-800 hover:text-black bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
         >
           <Eye size={13} /> View & Book
         </button>
@@ -204,7 +213,7 @@ export const LocationList: React.FC = () => {
           <Can permission={PERMISSIONS.LOCATIONS_CREATE}>
             <button
               onClick={() => setIsCreateOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs font-semibold shadow-xs transition-colors cursor-pointer"
             >
               <Plus size={16} /> Add Location
             </button>
@@ -228,29 +237,37 @@ export const LocationList: React.FC = () => {
           <div>
             <label className="label-caps-grey block mb-1.5">Location Name *</label>
             <Input
+              placeholder="e.g. Victorian Manor - Interior Hall"
               value={newLocName}
               onChange={(e) => setNewLocName(e.target.value)}
-              placeholder="e.g. Pinewood Stage A"
             />
           </div>
 
           <div>
-            <label className="label-caps-grey block mb-1.5">Full Address *</label>
+            <label className="label-caps-grey block mb-1.5">Address *</label>
             <Input
+              placeholder="e.g. 1044 Heritage Way, Atlanta, GA"
               value={newLocAddress}
               onChange={(e) => setNewLocAddress(e.target.value)}
-              placeholder="123 Studio Way, Los Angeles, CA"
             />
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="label-caps-grey block mb-1.5">Latitude</label>
-              <Input type="number" value={newLat} onChange={(e) => setNewLat(Number(e.target.value))} />
+              <Input
+                type="number"
+                value={newLat}
+                onChange={(e) => setNewLat(Number(e.target.value))}
+              />
             </div>
             <div>
               <label className="label-caps-grey block mb-1.5">Longitude</label>
-              <Input type="number" value={newLng} onChange={(e) => setNewLng(Number(e.target.value))} />
+              <Input
+                type="number"
+                value={newLng}
+                onChange={(e) => setNewLng(Number(e.target.value))}
+              />
             </div>
           </div>
 
@@ -265,7 +282,7 @@ export const LocationList: React.FC = () => {
       <Drawer
         title={
           <div className="flex items-center gap-2 text-base font-bold text-slate-900">
-            <MapPin size={20} className="text-blue-600" />
+            <MapPin size={20} className="text-zinc-800" />
             <span>{selectedLoc?.name}</span>
           </div>
         }
@@ -295,7 +312,7 @@ export const LocationList: React.FC = () => {
                 <span className="text-amber-800 font-semibold">Location is pending approval</span>
                 <button
                   onClick={handleApproveLocation}
-                  className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs flex items-center gap-1"
+                  className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs flex items-center gap-1 cursor-pointer"
                 >
                   <CheckCircle2 size={14} /> Approve Location
                 </button>
@@ -303,8 +320,8 @@ export const LocationList: React.FC = () => {
             )}
 
             {/* Reserve Date Range Form */}
-            <div className="p-4 bg-blue-50/60 border border-blue-100 rounded-2xl space-y-3">
-              <h3 className="font-bold text-sm text-blue-900 flex items-center gap-1.5">
+            <div className="p-4 bg-slate-100/70 border border-slate-200 rounded-2xl space-y-3">
+              <h3 className="font-bold text-sm text-slate-900 flex items-center gap-1.5">
                 <Calendar size={16} /> Reserve Location for Production
               </h3>
 
@@ -333,7 +350,7 @@ export const LocationList: React.FC = () => {
               <button
                 onClick={handleBookLocation}
                 disabled={bookingLoading}
-                className="w-full py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors shadow-xs"
+                className="w-full py-2 bg-black hover:bg-zinc-800 text-white font-semibold rounded-xl transition-colors shadow-xs cursor-pointer"
               >
                 {bookingLoading ? 'Checking Availability...' : 'Confirm Booking'}
               </button>

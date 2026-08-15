@@ -200,11 +200,11 @@ export const ProductionDetail: React.FC = () => {
                   <div>
                     <div className="flex items-center justify-between mb-3">
                       <h3 className="text-sm font-bold text-slate-800 flex items-center gap-2">
-                        <UserCheck size={16} className="text-blue-600" /> Cast Members ({production.assignedCast?.length || 0})
+                        <UserCheck size={16} className="text-zinc-800" /> Cast Members ({production.assignedCast?.length || 0})
                       </h3>
                       <button
                         onClick={() => setIsAssignCastOpen(true)}
-                        className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold"
+                        className="flex items-center gap-1 px-3 py-1.5 bg-black hover:bg-zinc-800 text-white rounded-lg text-xs font-semibold cursor-pointer"
                       >
                         <Plus size={14} /> Assign Cast
                       </button>
@@ -219,7 +219,7 @@ export const ProductionDetail: React.FC = () => {
                           </div>
                           <button
                             onClick={() => handleRemoveCast(cast._id || cast)}
-                            className="text-rose-500 hover:text-rose-700 p-1"
+                            className="text-rose-500 hover:text-rose-700 p-1 cursor-pointer"
                             title="Remove from Cast"
                           >
                             <Trash2 size={14} />
@@ -240,7 +240,7 @@ export const ProductionDetail: React.FC = () => {
                       </h3>
                       <button
                         onClick={() => setIsAssignCrewOpen(true)}
-                        className="flex items-center gap-1 px-3 py-1.5 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-xs font-semibold"
+                        className="flex items-center gap-1 px-3 py-1.5 bg-black hover:bg-zinc-800 text-white rounded-lg text-xs font-semibold cursor-pointer"
                       >
                         <Plus size={14} /> Assign Crew
                       </button>
@@ -276,7 +276,7 @@ export const ProductionDetail: React.FC = () => {
                     <h3 className="text-sm font-bold text-slate-800">Character Roster ({characters.length})</h3>
                     <button
                       onClick={() => setIsCreateCharacterOpen(true)}
-                      className="flex items-center gap-1 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold"
+                      className="flex items-center gap-1 px-3 py-1.5 bg-black hover:bg-zinc-800 text-white rounded-lg text-xs font-semibold cursor-pointer"
                     >
                       <Plus size={14} /> Add Character
                     </button>
@@ -289,7 +289,7 @@ export const ProductionDetail: React.FC = () => {
                         <div className="text-[11px] text-slate-500">{char.description || 'No description'}</div>
                         <div className="pt-2 text-xs border-t border-slate-200/60 flex items-center justify-between">
                           <span className="text-slate-400">Assigned Actor:</span>
-                          <span className="font-semibold text-blue-600">
+                          <span className="font-semibold text-slate-900">
                             {typeof char.castMember === 'object' ? char.castMember?.fullName : 'Unassigned'}
                           </span>
                         </div>

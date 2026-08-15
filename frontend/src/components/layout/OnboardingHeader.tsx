@@ -29,13 +29,13 @@ export const OnboardingHeader: React.FC = () => {
       <div className="flex items-center gap-3 sm:gap-4">
         {user && (
           <div className="flex items-center gap-2.5 bg-slate-50 border border-slate-200/60 rounded-full px-3 py-1">
-            <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-xs">
+            <div className="w-7 h-7 rounded-full bg-black text-white flex items-center justify-center font-bold text-xs shadow-xs">
               {user.fullName ? user.fullName.charAt(0).toUpperCase() : <UserIcon size={14} />}
             </div>
             <div className="text-left hidden sm:block">
               <div className="text-xs font-semibold text-slate-800 leading-tight">{user.fullName}</div>
               <div className="text-[10px] text-slate-500 flex items-center gap-1">
-                <Shield size={10} className="text-blue-500" />
+                <Shield size={10} className="text-zinc-700" />
                 <span>{user.contractorType || 'Applicant'}</span>
               </div>
             </div>

@@ -45,7 +45,7 @@ export const Sidebar: React.FC = () => {
             className={({ isActive }) =>
               `flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium transition-colors ${
                 isActive
-                  ? 'bg-blue-600 text-white font-semibold shadow-sm'
+                  ? 'bg-black text-white font-semibold ring-1 ring-zinc-700/60 shadow-sm'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/60'
               } ${sidebarCollapsed ? 'justify-center px-0' : ''}`
             }

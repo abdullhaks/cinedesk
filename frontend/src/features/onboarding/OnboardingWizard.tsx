@@ -170,7 +170,7 @@ export const OnboardingWizard: React.FC = () => {
         <div className="card-minimal">
           <div className="flex items-center justify-between mb-2">
             <span className="label-caps-grey">CONTRACTOR ONBOARDING WIZARD</span>
-            <span className="text-xs font-bold text-blue-600">
+            <span className="text-xs font-bold text-slate-900">
               Contractor Type: {application?.contractorType}
             </span>
           </div>
@@ -186,7 +186,7 @@ export const OnboardingWizard: React.FC = () => {
           {/* STEP 1: WELCOME */}
           {currentStepNum === 1 && (
             <div className="space-y-4 text-center py-6">
-              <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-2">
+              <div className="w-14 h-14 rounded-2xl bg-slate-100 text-slate-900 flex items-center justify-center mx-auto mb-2">
                 <ShieldCheck size={32} />
               </div>
               <h2 className="text-xl font-bold text-slate-900">Welcome to Cinidesk Pro</h2>
@@ -367,7 +367,7 @@ export const OnboardingWizard: React.FC = () => {
                   type="checkbox"
                   checked={agreed}
                   onChange={(e) => setAgreed(e.target.checked)}
-                  className="w-4 h-4 rounded text-blue-600 border-slate-300"
+                  className="w-4 h-4 rounded text-black accent-black border-slate-300"
                 />
                 <span className="text-xs font-semibold text-slate-700">
                   I agree to the contractor terms and conditions.
@@ -390,7 +390,7 @@ export const OnboardingWizard: React.FC = () => {
               <button
                 onClick={handleFinalSubmit}
                 disabled={saving}
-                className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm shadow-md transition-colors disabled:opacity-50 mt-4"
+                className="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-sm shadow-md transition-colors disabled:opacity-50 mt-4 cursor-pointer"
               >
                 {saving ? 'Submitting Application...' : 'Submit Application Now'}
               </button>
@@ -402,7 +402,7 @@ export const OnboardingWizard: React.FC = () => {
             {currentStepNum > 1 ? (
               <button
                 onClick={() => navigate(`/onboarding/${currentStepNum - 1}`)}
-                className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition-colors"
+                className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold transition-colors cursor-pointer"
               >
                 <ArrowLeft size={16} /> Back
               </button>
@@ -414,7 +414,7 @@ export const OnboardingWizard: React.FC = () => {
               <button
                 onClick={handleNextStep}
                 disabled={saving}
-                className="flex items-center gap-2 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold transition-colors disabled:opacity-50"
+                className="flex items-center gap-2 px-6 py-2.5 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs font-semibold transition-colors disabled:opacity-50 cursor-pointer"
               >
                 {saving ? 'Saving...' : 'Continue'} <ArrowRight size={16} />
               </button>

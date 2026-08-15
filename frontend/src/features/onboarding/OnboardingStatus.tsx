@@ -45,7 +45,7 @@ export const OnboardingStatusPage: React.FC = () => {
             </p>
             <button
               onClick={() => navigate('/apply')}
-              className="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold"
+              className="px-5 py-2.5 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs font-semibold cursor-pointer"
             >
               Start Application
             </button>
@@ -65,7 +65,7 @@ export const OnboardingStatusPage: React.FC = () => {
           {/* Status Card Banner */}
           <div className="card-minimal text-center py-8 px-6 shadow-md">
           {status === 'pending_review' && (
-            <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center mx-auto mb-3">
+            <div className="w-14 h-14 rounded-2xl bg-slate-100 text-slate-900 flex items-center justify-center mx-auto mb-3">
               <Clock size={32} />
             </div>
           )}
@@ -121,7 +121,7 @@ export const OnboardingStatusPage: React.FC = () => {
             <div className="mt-6">
               <button
                 onClick={() => navigate('/onboarding/1')}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors cursor-pointer"
               >
                 <RefreshCw size={16} /> Resume & Update Application
               </button>

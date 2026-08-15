@@ -6,7 +6,8 @@
     --bg-card: #ffffff;
     --text-hero: #0f172a;
     --text-muted: #64748b;
-    --accent-blue: #3b82f6;
+    --accent-blue: #0f172a;
+    --accent-primary: #0f172a;
   }
 
   body {

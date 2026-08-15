@@ -155,7 +155,7 @@ export const RoleManagement: React.FC = () => {
       render: (_: any, record: Role) => (
         <button
           onClick={() => handleOpenEdit(record)}
-          className="flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors"
+          className="flex items-center gap-1 text-xs font-semibold text-slate-800 hover:text-black bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
         >
           <Edit2 size={13} />
           <span>Edit Permissions</span>
@@ -179,7 +179,7 @@ export const RoleManagement: React.FC = () => {
 
         <button
           onClick={() => setIsCreateOpen(true)}
-          className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors"
+          className="flex items-center gap-2 px-4 py-2.5 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors cursor-pointer"
         >
           <Plus size={16} />
           <span>Create Custom Role</span>
@@ -193,7 +193,7 @@ export const RoleManagement: React.FC = () => {
       <Modal
         title={
           <div className="flex items-center gap-2 text-base font-bold text-slate-800">
-            <Shield size={18} className="text-blue-600" />
+            <Shield size={18} className="text-zinc-800" />
             <span>Manage Permissions — {editingRole?.name}</span>
           </div>
         }
@@ -219,13 +219,13 @@ export const RoleManagement: React.FC = () => {
                       onClick={() => handleTogglePerm(p.key)}
                       className={`flex items-start gap-2.5 p-2.5 rounded-xl border text-xs cursor-pointer transition-colors ${
                         isChecked
-                          ? 'bg-blue-50/60 border-blue-200 text-blue-900 font-medium'
+                          ? 'bg-slate-100 border-zinc-400 text-slate-900 font-medium'
                           : 'bg-slate-50 border-slate-200/60 text-slate-600 hover:bg-slate-100'
                       }`}
                     >
                       <div
                         className={`w-4 h-4 rounded mt-0.5 flex items-center justify-center border transition-colors ${
-                          isChecked ? 'bg-blue-600 border-blue-600 text-white' : 'border-slate-300 bg-white'
+                          isChecked ? 'bg-black border-black text-white' : 'border-slate-300 bg-white'
                         }`}
                       >
                         {isChecked && <Check size={12} />}
@@ -260,12 +260,12 @@ export const RoleManagement: React.FC = () => {
               value={newRoleName}
               onChange={(e) => setNewRoleName(e.target.value)}
               placeholder="e.g. Set Assistant Manager"
-              className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-blue-500"
+              className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-800 focus:outline-none focus:border-black focus:ring-1 focus:ring-black"
             />
           </div>
 
           <div>
-            <label className="label-caps-grey block mb-1.5">Select Initial Permissions</label>
+            <label className="label-caps-grey block mb-1.5">Select Initial Permissions ({createPermKeys.length} selected)</label>
             <div className="max-h-48 overflow-y-auto space-y-1 bg-slate-50 p-3 rounded-xl border border-slate-200">
               {allPermissions.map((p) => {
                 const isSelected = createPermKeys.includes(p.key);
@@ -282,7 +282,7 @@ export const RoleManagement: React.FC = () => {
                     className="flex items-center justify-between text-xs py-1.5 px-2 rounded cursor-pointer hover:bg-slate-200/60"
                   >
                     <span className="font-medium text-slate-700">{p.key}</span>
-                    {isSelected && <Check size={14} className="text-blue-600" />}
+                    {isSelected && <Check size={14} className="text-black" />}
                   </div>
                 );
               })}

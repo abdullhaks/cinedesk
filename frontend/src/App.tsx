@@ -29,7 +29,7 @@ export const App: React.FC = () => {
       <ConfigProvider
         theme={{
           token: {
-            colorPrimary: '#3B82F6',
+            colorPrimary: '#0f172a',
             borderRadius: 12,
             fontFamily: 'Inter, system-ui, sans-serif',
           },

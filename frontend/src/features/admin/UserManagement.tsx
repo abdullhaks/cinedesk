@@ -134,7 +134,7 @@ export const UserManagement: React.FC = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => handleOpenAssignRole(record)}
-            className="flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors"
+            className="flex items-center gap-1 text-xs font-semibold text-slate-800 hover:text-black bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
           >
             <Shield size={13} /> Assign Role
           </button>

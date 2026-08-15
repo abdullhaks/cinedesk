@@ -161,7 +161,7 @@ export const OnboardingReview: React.FC = () => {
       render: (_: any, record: OnboardingApplication) => (
         <button
           onClick={() => setSelectedApp(record)}
-          className="flex items-center gap-1.5 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors"
+          className="flex items-center gap-1.5 text-xs font-semibold text-slate-800 hover:text-black bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
         >
           <Eye size={14} /> Review Details
         </button>
@@ -219,7 +219,7 @@ export const OnboardingReview: React.FC = () => {
       <Drawer
         title={
           <div className="flex items-center gap-2 text-base font-bold text-slate-800">
-            <ClipboardCheck size={20} className="text-blue-600" />
+            <ClipboardCheck size={20} className="text-zinc-800" />
             <span>Onboarding Inspection — {selectedApp?.contractorType}</span>
           </div>
         }
@@ -324,7 +324,7 @@ export const OnboardingReview: React.FC = () => {
                         <div className="flex items-center gap-3 min-w-0">
                           <div
                             className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${
-                              isImg ? 'bg-blue-100 text-blue-600' : 'bg-amber-100 text-amber-700'
+                              isImg ? 'bg-slate-200 text-slate-800' : 'bg-amber-100 text-amber-700'
                             }`}
                           >
                             {isImg ? <ImageIcon size={18} /> : <FileText size={18} />}
@@ -348,7 +348,7 @@ export const OnboardingReview: React.FC = () => {
                               <button
                                 type="button"
                                 onClick={() => setPreviewImage(doc.fileUrl)}
-                                className="flex items-center gap-1 px-2.5 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 text-xs font-semibold rounded-lg transition-colors border border-blue-200/60 cursor-pointer"
+                                className="flex items-center gap-1 px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-lg transition-colors border border-slate-300 cursor-pointer"
                               >
                                 <Eye size={13} /> View
                               </button>
@@ -366,7 +366,7 @@ export const OnboardingReview: React.FC = () => {
                                 href={doc.fileUrl}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-1 px-2.5 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-600 text-xs font-semibold rounded-lg transition-colors border border-blue-200/60"
+                                className="flex items-center gap-1 px-2.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold rounded-lg transition-colors border border-slate-300"
                               >
                                 <ExternalLink size={13} /> View
                               </a>

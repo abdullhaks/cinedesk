@@ -41,12 +41,8 @@ export const FundRequestList: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const [reqsRes, prodsRes] = await Promise.all([
-        fundRequestApi.listRequests({ status: statusFilter, category: categoryFilter }),
-        productionApi.listProductions(),
-      ]);
+      const reqsRes = await fundRequestApi.listRequests({ status: statusFilter, category: categoryFilter });
       setRequests(reqsRes.items || []);
-      setProductions(prodsRes.items || []);
     } catch (err: any) {
       setError('Failed to load fund requests.');
     } finally {
@@ -54,9 +50,23 @@ export const FundRequestList: React.FC = () => {
     }
   };
 
+  const fetchProductions = async () => {
+    try {
+      const prodsRes = await productionApi.listProductions();
+      setProductions(prodsRes.items || []);
+    } catch {
+      // Graceful fallback if user role does not have productions.view permission
+      setProductions([]);
+    }
+  };
+
   useEffect(() => {
     fetchRequests();
   }, [statusFilter, categoryFilter]);
+
+  useEffect(() => {
+    fetchProductions();
+  }, []);
 
   const handleCreateRequest = async () => {
     if (!prodId || !amount || amount <= 0) {
@@ -171,7 +181,7 @@ export const FundRequestList: React.FC = () => {
       render: (_: any, record: FundRequestItem) => (
         <button
           onClick={() => setSelectedReq(record)}
-          className="flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors"
+          className="flex items-center gap-1 text-xs font-semibold text-slate-800 hover:text-black bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
         >
           <Eye size={13} /> View Request
         </button>
@@ -208,7 +218,7 @@ export const FundRequestList: React.FC = () => {
           <Can permission={PERMISSIONS.FUNDS_REQUEST}>
             <button
               onClick={() => setIsCreateOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs font-semibold shadow-xs transition-colors cursor-pointer"
             >
               <Plus size={16} /> Request Funds
             </button>

@@ -43,14 +43,8 @@ export const CostumeList: React.FC = () => {
     setLoading(true);
     setError(null);
     try {
-      const [cRes, pRes, uRes] = await Promise.all([
-        costumeApi.listCostumes({ status: statusFilter, category: categoryFilter }),
-        productionApi.listProductions(),
-        userApi.listUsers({ status: 'active' }),
-      ]);
+      const cRes = await costumeApi.listCostumes({ status: statusFilter, category: categoryFilter });
       setCostumes(cRes.items || []);
-      setProductions(pRes.items || []);
-      setActiveUsers(uRes.items || []);
     } catch (err: any) {
       setError('Failed to load wardrobe costumes inventory.');
     } finally {
@@ -58,9 +52,26 @@ export const CostumeList: React.FC = () => {
     }
   };
 
+  const fetchAncillaryData = async () => {
+    try {
+      const [pRes, uRes] = await Promise.allSettled([
+        productionApi.listProductions(),
+        userApi.listUsers({ status: 'active' }),
+      ]);
+      if (pRes.status === 'fulfilled') setProductions(pRes.value.items || []);
+      if (uRes.status === 'fulfilled') setActiveUsers(uRes.value.items || []);
+    } catch {
+      // safe fallback
+    }
+  };
+
   useEffect(() => {
     fetchCostumes();
   }, [statusFilter, categoryFilter]);
+
+  useEffect(() => {
+    fetchAncillaryData();
+  }, []);
 
   const handleCreateCostume = async () => {
     if (!name.trim() || !prodId) {
@@ -192,7 +203,7 @@ export const CostumeList: React.FC = () => {
           <Can permission={PERMISSIONS.COSTUMES_CREATE}>
             <button
               onClick={() => setIsCreateOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-xs transition-colors"
+              className="flex items-center gap-2 px-4 py-2 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs font-semibold shadow-xs transition-colors cursor-pointer"
             >
               <Plus size={16} /> Add Costume
             </button>

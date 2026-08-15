@@ -34,6 +34,7 @@ export const ROLE_SEEDS = [
     slug: 'finance_manager',
     permissionKeys: [
       'funds.view', 'funds.approve', 'funds.reject',
+      'productions.view',
       'reports.view',
     ],
     isSystemRole: true,
@@ -44,6 +45,7 @@ export const ROLE_SEEDS = [
     permissionKeys: [
       'locations.view', 'locations.create', 'locations.update',
       'locations.approve', 'locations.book',
+      'productions.view',
     ],
     isSystemRole: true,
   },
@@ -52,6 +54,7 @@ export const ROLE_SEEDS = [
     slug: 'costume_manager',
     permissionKeys: [
       'costumes.view', 'costumes.create', 'costumes.update', 'costumes.assign',
+      'productions.view',
     ],
     isSystemRole: true,
   },

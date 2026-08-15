@@ -126,7 +126,7 @@ export const ProductionList: React.FC = () => {
       render: (_: any, record: Production) => (
         <button
           onClick={() => navigate(`/productions/${record._id}`)}
-          className="flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-800 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-lg transition-colors"
+          className="flex items-center gap-1 text-xs font-semibold text-slate-800 hover:text-black bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg transition-colors cursor-pointer"
         >
           <span>View Details</span> <ArrowRight size={13} />
         </button>
@@ -150,7 +150,7 @@ export const ProductionList: React.FC = () => {
         <Can permission={PERMISSIONS.PRODUCTIONS_CREATE}>
           <button
             onClick={() => setIsCreateOpen(true)}
-            className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors"
+            className="flex items-center gap-2 px-4 py-2.5 bg-black hover:bg-zinc-800 text-white rounded-xl text-xs font-semibold shadow-sm transition-colors cursor-pointer"
           >
             <Plus size={16} />
             <span>Create Production</span>

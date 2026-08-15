@@ -37,7 +37,7 @@ export const Stepper: React.FC<StepperProps> = ({ steps, currentStep, onStepClic
                   isCompleted
                     ? 'bg-emerald-500 text-white shadow-sm'
                     : isCurrent
-                    ? 'bg-blue-600 text-white shadow-md ring-4 ring-blue-100'
+                    ? 'bg-black text-white shadow-md ring-4 ring-slate-200'
                     : 'bg-white border-2 border-slate-300 text-slate-400'
                 }`}
               >
@@ -46,7 +46,7 @@ export const Stepper: React.FC<StepperProps> = ({ steps, currentStep, onStepClic
               <div className="text-center mt-2 hidden sm:block">
                 <div
                   className={`text-xs font-semibold ${
-                    isCurrent ? 'text-blue-600' : isCompleted ? 'text-slate-800' : 'text-slate-400'
+                    isCurrent ? 'text-slate-900 font-bold' : isCompleted ? 'text-slate-800' : 'text-slate-400'
                   }`}
                 >
                   {step.title}
